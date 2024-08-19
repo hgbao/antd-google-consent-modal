@@ -1,0 +1,10 @@
+@use '../../styles/variables';
+
+.modal {
+  position: absolute !important;
+  top: unset !important;
+  right: 20px !important;
+  bottom: 20px !important;
+  max-width: calc(100vw - 40px) !important;
+  padding-bottom: 0 !important;
+}

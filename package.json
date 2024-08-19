@@ -1,0 +1,70 @@
+{
+  "name": "aphrodite",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "18"
+  },
+  "packageManager": "yarn@3.2.1",
+  "scripts": {
+    "setup": "yarn husky",
+    "build": "rollup -c --bundleConfigAsCjs",
+    "lint": "yarn tsc && yarn eslint . && yarn prettier --check . && yarn stylelint",
+    "eslint": "ESLINT_USE_FLAT_CONFIG=false eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx",
+    "prettier": "prettier --ignore-path .gitignore --ignore-unknown '!**/*.{js,jsx,ts,tsx}'",
+    "stylelint": "stylelint --ignore-path .gitignore \"**/*.{css,scss,sass}\"",
+    "format": "yarn eslint --fix . && yarn prettier --write . && yarn stylelint --fix",
+    "depcheck": "depcheck . --ignore-patterns=.yarn && madge --circular src"
+  },
+  "dependencies": {
+    "antd": "^5.20.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sass": "^1.77.8"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-react": "^7.24.7",
+    "@rollup/plugin-alias": "^5.1.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.7",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/parser": "^8.1.0",
+    "autoprefixer": "^10.4.20",
+    "depcheck": "^1.4.7",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.9",
+    "madge": "^7.0.0",
+    "postcss-scss": "^4.0.9",
+    "prettier": "^3.3.3",
+    "rollup": "^4.21.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "stylelint": "^16.8.2",
+    "stylelint-config-property-sort-order-smacss": "^10.0.0",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-prettier": "^5.0.2",
+    "typescript": "^5.5.4"
+  },
+  "resolutions": {
+    "eslint-plugin-react-hooks": "4.6.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint",
+    "*.{ts,tsx}": "bash -c tsc -p tsconfig.json",
+    "*.{css,scss,sass}": "stylelint",
+    "!*.{js,jsx,ts,tsx,css,scss,sass}": "prettier -c"
+  }
+}

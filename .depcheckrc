@@ -1,0 +1,4 @@
+{
+  "ignorePath": ".gitignore",
+  "ignores": ["stylelint-*", "postcss-*", "husky"],
+}

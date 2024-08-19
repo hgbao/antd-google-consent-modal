@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es5", // Target ECMAScript 5 to ensure compatibility with older browsers
+    "lib": ["dom", "dom.iterable", "esnext"], // Include libraries for DOM, DOM iterable, and ESNext features
+    "allowJs": true, // Allow JavaScript files to be compiled
+    "skipLibCheck": true, // Skip type checking of declaration files (.d.ts)
+    "strict": true, // Enable all strict type-checking options
+    "forceConsistentCasingInFileNames": true, // Ensure file imports have consistent casing
+    "noEmit": true, // Do not emit any output files, useful in a build setup where another tool (like Rollup) handles output
+    "esModuleInterop": true, // Enable interoperation between CommonJS and ES Modules
+    "module": "esnext", // Use ESNext module resolution
+    "moduleResolution": "node", // Use Node.js module resolution
+    "resolveJsonModule": true, // Allow importing JSON files as modules
+    "isolatedModules": true, // Ensure each file can be safely transpiled without relying on other files
+    "jsx": "preserve", // Preserve JSX syntax in output for further processing by Babel or other tools
+    "typeRoots": ["./src/types", "./node_modules/@types"],
+    "baseUrl": "./", // Base directory to resolve non-relative module names
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"], // Include TypeScript declaration files and all .ts and .tsx files
+  "exclude": ["node_modules"] // Exclude node_modules from the compilation
+}

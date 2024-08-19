@@ -1,0 +1,13 @@
+{
+  "customSyntax": "postcss-scss",
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-prettier/recommended",
+    "stylelint-config-property-sort-order-smacss"
+  ],
+  "rules": {
+    "selector-class-pattern": null,
+    "selector-pseudo-class-no-unknown": null,
+    "no-descending-specificity": [true, { "severity": "warning" }]
+  }
+}

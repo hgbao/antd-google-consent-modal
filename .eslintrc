@@ -1,0 +1,73 @@
+{
+  "root": true, // Make sure eslint picks up the config at the root of the directory
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020, // Use the latest ecmascript standard
+    "sourceType": "module", // Allows using import/export statements
+    "ecmaFeatures": {
+      "jsx": true, // Enable JSX since we're using React
+      "tsx": true // Enable TSX since we're using React
+    },
+    "project": ["./tsconfig.json", "./jsconfig.json"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Automatically detect the react version
+    }
+  },
+  "env": {
+    "browser": true, // Enables browser globals like window and document
+    "amd": true, // Enables require() and define() as global variables as per the amd spec.
+    "node": true, // Enables Node.js global variables and Node.js scoping.
+    "es6": true
+  },
+  "globals": {
+    "React": true
+  },
+  "extends": ["react-app", "eslint:recommended", "plugin:prettier/recommended"],
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "jsx-a11y/anchor-is-valid": "off",
+    "prefer-const": "error",
+    "object-curly-newline": [
+      "error",
+      {
+        "ObjectExpression": { "multiline": true, "consistent": true },
+        "ObjectPattern": { "multiline": true, "consistent": true }
+      }
+    ],
+    // React
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "callbacksLast": true,
+        "reservedFirst": true,
+        "shorthandLast": true,
+        "noSortAlphabetically": true
+      }
+    ],
+    "react/jsx-curly-brace-presence": [
+      "warn",
+      { "props": "never", "children": "never", "propElementValues": "always" }
+    ]
+  },
+  "overrides": [
+    {
+      // Typescript rules
+      "files": ["**/*.{ts,tsx}"],
+      "rules": {
+        "no-unused-vars": "off",
+        "@typescript-eslint/consistent-type-imports": "error",
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-floating-promises": "error",
+        "@typescript-eslint/consistent-type-definitions": "error"
+      }
+    }
+  ]
+}
