@@ -8,10 +8,14 @@ import typescript from '@rollup/plugin-typescript';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
 import dts from 'rollup-plugin-dts';
+import livereload from 'rollup-plugin-livereload';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
+import serve from 'rollup-plugin-serve';
 
 require('sass');
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const settings = [
   {
@@ -68,7 +72,14 @@ const settings = [
         'process.env.NODE_ENV': JSON.stringify('production'),
         preventAssignment: true, // Required option to avoid assignment of values during replacement
       }),
-    ],
+      !isProduction &&
+        serve({
+          open: true, // Opens the browser
+          contentBase: ['.'], // Serves files from 'dist' directory
+          port: 3001, // Specifies the port
+        }),
+      !isProduction && livereload('dist'), // Watches the 'dist' directory for changes
+    ].filter(Boolean),
   },
   {
     input: 'src/index.tsx',

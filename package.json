@@ -9,6 +9,7 @@
   "scripts": {
     "setup": "yarn husky",
     "build": "rollup -c --bundleConfigAsCjs",
+    "dev": "NODE_ENV=development rollup -c --bundleConfigAsCjs --watch",
     "lint": "yarn tsc && yarn eslint . && yarn prettier --check . && yarn stylelint",
     "eslint": "ESLINT_USE_FLAT_CONFIG=false eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --ignore-path .gitignore --ignore-unknown '!**/*.{js,jsx,ts,tsx}'",
@@ -19,8 +20,7 @@
   "dependencies": {
     "antd": "^5.20.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "sass": "^1.77.8"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -50,8 +50,11 @@
     "prettier": "^3.3.3",
     "rollup": "^4.21.0",
     "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-serve": "^1.1.1",
+    "sass": "^1.77.8",
     "stylelint": "^16.8.2",
     "stylelint-config-property-sort-order-smacss": "^10.0.0",
     "stylelint-config-standard-scss": "^13.1.0",
