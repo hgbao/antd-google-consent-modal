@@ -33,8 +33,8 @@ const settings = [
       },
       {
         file: 'dist/index.min.js',
-        format: 'iife', // Immediately Invoked Function Expression format for minified output
-        name: 'AntdGoogleConsentModal', // Global variable name for IIFE format
+        format: 'iife', // Immediately Invoked Function Expression format for the browser
+        name: 'AntdGoogleConsentModal', // Global variable name in the browser
         sourcemap: true,
         plugins: [terser()], // Minifies the code
       },
@@ -75,7 +75,7 @@ const settings = [
       !isProduction &&
         serve({
           open: true, // Opens the browser
-          contentBase: ['.'], // Serves files from 'dist' directory
+          contentBase: ['.'], // Serves files from the current directory
           port: 3001, // Specifies the port
         }),
       !isProduction && livereload('dist'), // Watches the 'dist' directory for changes

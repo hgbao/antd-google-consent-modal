@@ -6,19 +6,23 @@
     "skipLibCheck": true, // Skip type checking of declaration files (.d.ts)
     "strict": true, // Enable all strict type-checking options
     "forceConsistentCasingInFileNames": true, // Ensure file imports have consistent casing
-    "noEmit": true, // Do not emit any output files, useful in a build setup where another tool (like Rollup) handles output
     "esModuleInterop": true, // Enable interoperation between CommonJS and ES Modules
     "module": "esnext", // Use ESNext module resolution
     "moduleResolution": "node", // Use Node.js module resolution
     "resolveJsonModule": true, // Allow importing JSON files as modules
     "isolatedModules": true, // Ensure each file can be safely transpiled without relying on other files
     "jsx": "preserve", // Preserve JSX syntax in output for further processing by Babel or other tools
-    "typeRoots": ["./src/types", "./node_modules/@types"],
+    "typeRoots": ["./src/types", "./node_modules/@types"], // Specify type declaration roots
     "baseUrl": "./", // Base directory to resolve non-relative module names
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "outDir": "./dist", // Output directory for compiled files
+    "declaration": true, // Generate TypeScript declaration files (.d.ts)
+    "declarationDir": "./dist/types", // Directory where declaration files will be output
+    "noEmit": false, // Emit output files (set to false since you want to generate files)
+    "emitDeclarationOnly": true // Emit only declaration files, no JavaScript
   },
-  "include": ["**/*.ts", "**/*.tsx"], // Include TypeScript declaration files and all .ts and .tsx files
-  "exclude": ["node_modules"] // Exclude node_modules from the compilation
+  "include": ["**/*.ts", "**/*.tsx"], // Include all TypeScript files
+  "exclude": ["node_modules", "dist"] // Exclude node_modules and dist from the compilation
 }

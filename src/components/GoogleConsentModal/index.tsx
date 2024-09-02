@@ -21,7 +21,7 @@ const updateGTag = (consentStatus: GOOGLE_CONSENT_STATUS) => {
   });
 };
 
-const GoogleConsentBanner = () => {
+const GoogleConsentModal = () => {
   const { isDesktop } = useScreenSize();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -72,4 +72,4 @@ const GoogleConsentBanner = () => {
   );
 };
 
-export default GoogleConsentBanner;
+export default GoogleConsentModal;

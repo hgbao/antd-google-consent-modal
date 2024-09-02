@@ -1,9 +1,13 @@
 {
   "name": "antd-google-consent-modal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A consent modal for Google Ads and Google Analytics, built with Ant Design.",
   "main": "dist/index.js",
   "types": "dist/types.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/hgbao/antd-google-consent-modal.git"
