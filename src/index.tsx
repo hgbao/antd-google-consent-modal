@@ -1,3 +1,4 @@
+import { ConfigProvider } from 'antd';
 import ReactDOM from 'react-dom/client';
 
 import GoogleConsentModal from '@/components/GoogleConsentModal';
@@ -13,7 +14,9 @@ const renderGoogleConsentModal = () => {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <ScreenSizeProvider>
-      <GoogleConsentModal />
+      <ConfigProvider>
+        <GoogleConsentModal />
+      </ConfigProvider>
     </ScreenSizeProvider>
   );
 };
