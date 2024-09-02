@@ -1,14 +1,29 @@
 {
-  "name": "aphrodite",
-  "version": "0.1.0",
-  "private": true,
+  "name": "antd-google-consent-modal",
+  "version": "0.0.1",
+  "description": "A consent modal for Google Ads and Google Analytics, built with Ant Design.",
+  "main": "dist/index.js",
+  "types": "dist/types.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hgbao/antd-google-consent-modal.git"
+  },
+  "homepage": "https://github.com/yourusername/your-repo-name#readme",
+  "keywords": [
+    "antd",
+    "google",
+    "consent",
+    "google-ads"
+  ],
+  "author": "Bao Huynh",
+  "license": "MIT",
   "engines": {
     "node": "18"
   },
   "packageManager": "yarn@3.2.1",
   "scripts": {
     "setup": "yarn husky",
-    "build": "rollup -c --bundleConfigAsCjs",
+    "build": "NODE_ENV=production rollup -c --bundleConfigAsCjs",
     "dev": "NODE_ENV=development rollup -c --bundleConfigAsCjs --watch",
     "lint": "yarn tsc && yarn eslint . && yarn prettier --check . && yarn stylelint",
     "eslint": "ESLINT_USE_FLAT_CONFIG=false eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx",
