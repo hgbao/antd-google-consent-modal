@@ -8,8 +8,19 @@ import { GOOGLE_CONSENT_STATUS } from '@/utils/constants';
 import styles from './styles.module.scss';
 
 const updateGTag = (consentStatus: GOOGLE_CONSENT_STATUS) => {
-  // @ts-ignore
   // TODO: Find out why window.gtag is not recognized
+  // @ts-ignore
+  if (!window.gtag) {
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+    // @ts-ignore
+    window.gtag = function () {
+      // @ts-ignore
+      window.dataLayer.push(arguments);
+    };
+  }
+
+  // @ts-ignore
   window.gtag('consent', 'update', {
     ad_storage: consentStatus,
     ad_user_data: consentStatus,
