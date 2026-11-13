@@ -422,6 +422,7 @@ Publishing uses npm trusted publishing: npm trusts this repository's workflow th
    - Repository: `antd-google-consent-modal`
    - Workflow filename: `npm-publish.yml`
    - Environment name: leave empty
+   - Allowed actions: tick `npm publish` and `npm dist-tag`. Without `npm publish`, the run signs provenance and then fails with `E403 OIDC permission denied for this action`.
 4. On the same Settings page, under Publishing access, choose "Require two-factor authentication and disallow tokens" and save.
    Trusted publishing keeps working, and leaked tokens can no longer publish.
 5. Create `.github/workflows/npm-publish.yml` with these properties:
@@ -432,7 +433,8 @@ Publishing uses npm trusted publishing: npm trusts this repository's workflow th
    - No `NODE_AUTH_TOKEN` and no npm secret.
 6. Create the `release` branch from `main` and push it: `git push origin main:release`.
 
-If a publish fails with `E404` or `ENEEDAUTH`, check that the three Trusted Publisher fields match the repository and workflow file name exactly.
+If a publish fails with `E404`, `ENEEDAUTH` or `E403`, check that the Trusted Publisher fields match the repository and workflow file name exactly, including case, and that `npm publish` is an allowed action.
+A publisher created or changed in the last few minutes may not be active yet, so wait a moment before re-running.
 
 ### Releasing
 
