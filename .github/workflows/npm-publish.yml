@@ -27,6 +27,5 @@ jobs:
       - run: npm test
       - run: npm run build
 
+      # npm trusted publishing: authenticates through GitHub's OIDC token (id-token: write), no secret.
       - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

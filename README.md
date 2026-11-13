@@ -411,23 +411,28 @@ Follow these steps in order to set it up from nothing.
 
 ### One-time setup
 
-1. Create an npm account, or use the one that owns the package.
-   The package name `antd-google-consent-modal` must be free, or owned by you.
-2. On npmjs.com, create an access token: Account, Access Tokens, Generate New Token.
-   Use a granular access token with read and write permission on this package, or an Automation token.
-   Tokens for first publish need permission to create new packages.
-3. In the GitHub repository, open Settings, Secrets and variables, Actions, and add a repository secret named `NPM_TOKEN` with that token.
-4. Create `.github/workflows/npm-publish.yml` with these properties:
-   - Trigger: `push` on branch `release`.
-   - Permissions: `contents: read` and `id-token: write` (the latter is required for provenance).
-   - Runner `ubuntu-latest`: checkout, `actions/setup-node` with Node 24, `cache: npm` and `registry-url: https://registry.npmjs.org`.
-   - Steps in order: `npm ci`, `npm run lint`, `npm test`, `npm run build`.
-   - Final step: `npm publish --provenance --access public` with `NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}`.
-5. Create the `release` branch from `main` and push it: `git push origin main:release`.
+Publishing uses npm trusted publishing: npm trusts this repository's workflow through GitHub's OIDC token, so no npm token is stored and nothing expires.
 
-Optional: use npm trusted publishing (OIDC) instead of a token.
-On npmjs.com, open the package settings, add a Trusted Publisher (GitHub Actions, this repository, workflow file `npm-publish.yml`), then remove `NPM_TOKEN` and the `NODE_AUTH_TOKEN` line.
-The `id-token: write` permission is what authorizes it.
+1. Create an npm account, or use the one that owns the package, with two-factor authentication on.
+   The package name `antd-google-consent-modal` must be free, or owned by you.
+2. Trusted publishing can only be set on a package that already exists.
+   If the package has never been published, publish the first version from your machine: `npm login`, `npm run build`, `npm publish --access public`.
+3. On npmjs.com, open the package, then Settings, then Trusted Publisher, and choose GitHub Actions:
+   - Organization or user: `hgbao`
+   - Repository: `antd-google-consent-modal`
+   - Workflow filename: `npm-publish.yml`
+   - Environment name: leave empty
+4. On the same Settings page, under Publishing access, choose "Require two-factor authentication and disallow tokens" and save.
+   Trusted publishing keeps working, and leaked tokens can no longer publish.
+5. Create `.github/workflows/npm-publish.yml` with these properties:
+   - Trigger: `push` on branch `release`.
+   - Permissions: `contents: read` and `id-token: write` (trusted publishing and provenance need it).
+   - Runner `ubuntu-latest` (trusted publishing needs a GitHub-hosted runner): checkout, `actions/setup-node` with Node 24 (npm 11.5.1 or newer), `cache: npm` and `registry-url: https://registry.npmjs.org`.
+   - Steps in order: `npm ci`, `npm run lint`, `npm test`, `npm run build`, `npm publish --provenance --access public`.
+   - No `NODE_AUTH_TOKEN` and no npm secret.
+6. Create the `release` branch from `main` and push it: `git push origin main:release`.
+
+If a publish fails with `E404` or `ENEEDAUTH`, check that the three Trusted Publisher fields match the repository and workflow file name exactly.
 
 ### Releasing
 
