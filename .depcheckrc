@@ -1,4 +1,4 @@
 {
   "ignorePath": ".gitignore",
-  "ignores": ["stylelint-*", "postcss-*", "husky"],
+  "ignores": ["husky", "tslib", "globals", "@eslint/js"]
 }

@@ -2,11 +2,66 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ANTD Google Consent Modal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Dev: antd-google-consent-modal</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 24px;
+      }
+      pre {
+        background: #f5f5f5;
+        padding: 12px;
+        max-height: 60vh;
+        overflow: auto;
+      }
+      html.dark body {
+        background: #141414;
+        color: #e6e6e6;
+      }
+      html.dark pre {
+        background: #1f1f1f;
+      }
+      button {
+        margin-right: 8px;
+      }
+    </style>
+    <script>
+      // Fake gtag that logs every call, so no Google account is needed to test.
+      window.dataLayer = [];
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+        const line = JSON.stringify(Array.from(arguments));
+        console.log('[gtag]', line);
+        (window.gtagLog = window.gtagLog || []).push(line);
+        const log = document.getElementById('log');
+        if (log) log.textContent = window.gtagLog.join('\n');
+      };
+      window.AntdGoogleConsentModalConfig = {
+        privacyPolicyUrl: 'https://example.com/privacy',
+        settingsButton: true,
+        onChange: (choices) => console.log('[onChange]', choices),
+      };
+    </script>
+    <!-- Must load before the real Google tag, so the consent default comes first. -->
+    <script src="./dist/index.min.js"></script>
   </head>
   <body>
-    <div id="root"></div>
-    <script src="./dist/index.js"></script>
+    <h1>antd-google-consent-modal dev page</h1>
+    <button onclick="AntdGoogleConsentModal.open()">Cookie settings</button>
+    <button
+      onclick="
+        localStorage.removeItem('googleConsent');
+        location.reload();
+      "
+    >
+      Reset consent
+    </button>
+    <button onclick="document.documentElement.classList.toggle('dark')">Toggle dark site</button>
+    <h2>gtag calls</h2>
+    <pre id="log"></pre>
+    <script>
+      document.getElementById('log').textContent = (window.gtagLog || []).join('\n');
+    </script>
   </body>
 </html>

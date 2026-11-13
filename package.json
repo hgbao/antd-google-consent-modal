@@ -1,9 +1,8 @@
 {
   "name": "antd-google-consent-modal",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A consent modal for Google Ads and Google Analytics, built with Ant Design.",
-  "main": "dist/index.js",
-  "types": "dist/types.d.ts",
+  "main": "dist/index.cjs",
   "files": [
     "dist",
     "README.md"
@@ -12,7 +11,6 @@
     "type": "git",
     "url": "https://github.com/hgbao/antd-google-consent-modal.git"
   },
-  "homepage": "https://github.com/yourusername/your-repo-name#readme",
   "keywords": [
     "antd",
     "google",
@@ -21,72 +19,74 @@
   ],
   "author": "Bao Huynh",
   "license": "MIT",
+  "type": "module",
+  "homepage": "https://github.com/hgbao/antd-google-consent-modal#readme",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "unpkg": "dist/index.min.js",
+  "jsdelivr": "dist/index.min.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "sideEffects": false,
   "engines": {
-    "node": "18"
+    "node": ">=24"
   },
-  "packageManager": "yarn@3.2.1",
   "scripts": {
-    "setup": "yarn husky",
-    "build": "NODE_ENV=production rollup -c --bundleConfigAsCjs",
-    "dev": "NODE_ENV=development rollup -c --bundleConfigAsCjs --watch",
-    "lint": "yarn tsc && yarn eslint . && yarn prettier --check . && yarn stylelint",
-    "eslint": "ESLINT_USE_FLAT_CONFIG=false eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx",
-    "prettier": "prettier --ignore-path .gitignore --ignore-unknown '!**/*.{js,jsx,ts,tsx}'",
-    "stylelint": "stylelint --ignore-path .gitignore \"**/*.{css,scss,sass}\"",
-    "format": "yarn eslint --fix . && yarn prettier --write . && yarn stylelint --fix",
-    "depcheck": "depcheck . --ignore-patterns=.yarn && madge --circular src"
+    "prepare": "husky",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit && eslint . && prettier --check .",
+    "format": "eslint --fix . && prettier --write .",
+    "depcheck": "depcheck ."
   },
-  "dependencies": {
-    "antd": "^5.20.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.3",
-    "@babel/preset-react": "^7.24.7",
-    "@rollup/plugin-alias": "^5.1.0",
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-replace": "^5.0.7",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/parser": "^8.1.0",
-    "autoprefixer": "^10.4.20",
-    "depcheck": "^1.4.7",
-    "eslint": "8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "husky": "^9.1.4",
-    "lint-staged": "^15.2.9",
-    "madge": "^7.0.0",
-    "postcss-scss": "^4.0.9",
-    "prettier": "^3.3.3",
-    "rollup": "^4.21.0",
-    "rollup-plugin-dts": "^6.1.1",
-    "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-serve": "^1.1.1",
-    "sass": "^1.77.8",
-    "stylelint": "^16.8.2",
-    "stylelint-config-property-sort-order-smacss": "^10.0.0",
-    "stylelint-config-standard-scss": "^13.1.0",
-    "stylelint-prettier": "^5.0.2",
-    "typescript": "^5.5.4"
-  },
-  "resolutions": {
-    "eslint-plugin-react-hooks": "4.6.0"
+  "peerDependencies": {
+    "antd": "^5.21.0 || ^6.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint",
-    "*.{ts,tsx}": "bash -c tsc -p tsconfig.json",
-    "*.{css,scss,sass}": "stylelint",
-    "!*.{js,jsx,ts,tsx,css,scss,sass}": "prettier -c"
+    "*.{js,mjs,ts,tsx}": "eslint",
+    "*": "prettier --check --ignore-unknown"
+  },
+  "devDependencies": {
+    "@ant-design/cssinjs": "^2.1.2",
+    "@eslint/js": "^10.0.1",
+    "@rollup/plugin-commonjs": "^29.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-replace": "^6.0.3",
+    "@rollup/plugin-terser": "^1.0.2",
+    "@rollup/plugin-typescript": "^12.3.1",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "antd": "^6.7.0",
+    "depcheck": "^1.4.7",
+    "eslint": "^10.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-simple-import-sort": "^14.0.0",
+    "globals": "^17.14.0",
+    "husky": "^9.1.7",
+    "jsdom": "^29.1.1",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.10.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "rollup": "^4.68.3",
+    "rollup-plugin-dts": "^6.5.1",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-serve": "^3.0.0",
+    "tslib": "^2.9.1",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.2",
+    "vitest": "^5.1.0"
   }
 }
